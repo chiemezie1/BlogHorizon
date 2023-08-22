@@ -15,6 +15,10 @@ The frontend code is organized into the following directories:
   - `App.js`: The main entry point of the application.
   - `index.js`: Renders the React app into the HTML root element.
 
+## Styling with Tailwind CSS
+
+The frontend of BlogHorizon is styled using **Tailwind CSS**, a utility-first CSS framework that allows for rapid development and customization. Tailwind CSS classes are used to style components and create responsive layouts.
+
 ## Getting Started
 
 1. **Clone the Repository**: Begin by cloning this repository to your local machine.
