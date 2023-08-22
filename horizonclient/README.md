@@ -1,6 +1,3 @@
-#
-
-````markdown
 # BlogHorizon Frontend
 
 Welcome to the frontend repository of **BlogHorizon**, a dynamic and engaging blogging platform that empowers users to share their thoughts, stories, and insights with the world. This frontend repository contains the user interface components, pages, and styles that make up the client-side of the application.
