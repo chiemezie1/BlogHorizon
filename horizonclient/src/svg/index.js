@@ -18,6 +18,7 @@ import mode_comment from './mode_comment.svg'
 import phone_enabled from './phone_enabled.svg'
 import photo_camera from './photo_camera.svg'
 import edit from './edit.svg'
+import check_circle from './check_circle.svg'
 
 
 
@@ -44,4 +45,5 @@ export{
     phone_enabled,
     photo_camera,
     edit,
+    check_circle,
 }

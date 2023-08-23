@@ -1,10 +1,10 @@
 import React from "react";
-import { add } from "../svg/index";
+import { check_circle } from "../svg/index";
 
 function Home() {
   return (
-    <div className=" ">
-    
+    <div className="m-8 ">
+      
     </div>
   );
 }
