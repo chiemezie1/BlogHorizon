@@ -19,6 +19,11 @@ import phone_enabled from './phone_enabled.svg'
 import photo_camera from './photo_camera.svg'
 import edit from './edit.svg'
 import check_circle from './check_circle.svg'
+import phone_msg from './phone_msg.svg'
+import settings from './settings.svg'
+import schedule from './schedule.svg'
+import post from './post.svg'
+import x_png from './x_png.png'
 
 
 
@@ -46,4 +51,9 @@ export{
     photo_camera,
     edit,
     check_circle,
+    phone_msg,
+    settings,
+    x_png,
+    schedule,
+    post,
 }
