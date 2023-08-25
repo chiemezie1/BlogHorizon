@@ -23,6 +23,7 @@ import phone_msg from './phone_msg.svg'
 import settings from './settings.svg'
 import schedule from './schedule.svg'
 import post from './post.svg'
+import home from './home.svg'
 import x_png from './x_png.png'
 
 
@@ -56,4 +57,5 @@ export{
     x_png,
     schedule,
     post,
+    home,
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import ProfileImage from "../components/ProfileImage";
 import { Link } from "react-router-dom";
+import { post, schedule, x_png, settings, edit, phone_msg } from "../svg/index";
 
 function UserProfile() {
   const svg = "path/to/your/svg";
@@ -12,13 +13,14 @@ function UserProfile() {
     "335",
     "366",
     "+2340816545430",
-    "@chiemezieagbo"
+    "@chiemezieagbo",
   ];
 
   return (
     <div>
       <div className="">
-        <div className="p-8 text-right">
+        <div className=" flex p-8 gap-1 justify-end items-center">
+          <img src={settings} alt="-" className="h-4 w-4" />
           <Link className="no-underline text-opacity-50 text-md font-semibold leading-relaxed">
             Edit
           </Link>
@@ -43,22 +45,37 @@ function UserProfile() {
           </div>
         </div>
         <div className="pl-20 md:pl-8 pt-8 font-bold">
-          <div className="font-semibold text-gray-700">
-          Posts: <span className="font-bold">{Posts} </span>
-          </div>
-          <div className="font-semibold text-gray-700">
-          Joined: <span className="font-bold">{Joined} </span>
-          </div>
-          <div className="font-semibold text-gray-700">
-          Lives in: <span className="font-bold">{LivesIn} </span>
-          </div>
-          <div className="font-semibold text-gray-700">
-          WhatsApp: <span className="font-bold">{Whatsapp} </span>
-          </div>
-          <div className="font-semibold text-gray-700">
-         x: <span className="font-bold">{x} </span>
-          </div>
 
+          <div className=" flex p-2 gap-1 items-center">
+            <img src={post} alt="-" className="h-4 w-4" />
+            <div className="font-semibold text-gray-700">
+              Posts: <span className="font-bold">{Posts} </span>
+            </div>
+          </div>
+          <div className=" flex p-2 gap-1 items-center">
+            <img src={schedule} alt="-" className="h-4 w-4" />
+            <div className="font-semibold text-gray-700">
+              Joined: <span className="font-bold">{Joined} </span>
+            </div>
+          </div>
+          <div className=" flex p-2 gap-1 items-center">
+            <img src={settings} alt="-" className="h-4 w-4" />
+            <div className="font-semibold text-gray-700">
+              Lives in: <span className="font-bold">{LivesIn} </span>
+            </div>
+          </div>
+          <div className=" flex p-2 gap-1 items-center">
+            <img src={phone_msg} alt="-" className="h-4 w-4" />
+            <div className="font-semibold text-gray-700">
+              WhatsApp: <span className="font-bold">{Whatsapp} </span>
+            </div>
+          </div>
+          <div className=" flex p-2 gap-1 items-center">
+            <img src={x_png} alt="-" className="h-4 w-4" />
+            <div className="font-semibold text-gray-700">
+              : <span className="font-bold">{x} </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
