@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileImage from "../components/ProfileImage";
 import { Link } from "react-router-dom";
-import { post, schedule, x_png, settings, edit, phone_msg } from "../svg/index";
+import { post, schedule, x_png, settings, home, phone_msg } from "../svg/index";
 
 function UserProfile() {
   const svg = "path/to/your/svg";
@@ -18,14 +18,14 @@ function UserProfile() {
 
   return (
     <div>
-      <div className="">
-        <div className=" flex p-8 gap-1 justify-end items-center">
+      <div className="p-2 ">
+        <div className=" flex p-4 gap-1 justify-end items-center">
           <img src={settings} alt="-" className="h-4 w-4" />
           <Link className="no-underline text-opacity-50 text-md font-semibold leading-relaxed">
             Edit
           </Link>
         </div>
-        <div className="flex flex-col md:flex-row items-center pt-12">
+        <div className="flex flex-col md:flex-row items-center pt-4">
           <ProfileImage svg={svg} size_w={64} size_h={64} />
           <div className="md:pl-4">
             <div className="text-black text-2xl font-bold text-center md:text-start leading-8">
@@ -44,7 +44,7 @@ function UserProfile() {
             </div>
           </div>
         </div>
-        <div className="pl-20 md:pl-8 pt-8 font-bold">
+        <div className="pl-4 md:pl-8 pt-8 font-bold">
 
           <div className=" flex p-2 gap-1 items-center">
             <img src={post} alt="-" className="h-4 w-4" />
@@ -59,7 +59,7 @@ function UserProfile() {
             </div>
           </div>
           <div className=" flex p-2 gap-1 items-center">
-            <img src={settings} alt="-" className="h-4 w-4" />
+            <img src={home} alt="-" className="h-4 w-4" />
             <div className="font-semibold text-gray-700">
               Lives in: <span className="font-bold">{LivesIn} </span>
             </div>
