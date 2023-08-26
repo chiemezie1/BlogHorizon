@@ -17,9 +17,9 @@ function UserProfile() {
   ];
 
   return (
-    <div>
-      <div className="p-2 ">
-        <div className=" flex p-4 gap-1 justify-end items-center">
+    <div className="max-w-5xl flex justify-center mx-auto">
+      <div className="">
+        <div className=" flex p-2 gap-1 justify-end items-center">
           <img src={settings} alt="-" className="h-4 w-4" />
           <Link className="no-underline text-opacity-50 text-md font-semibold leading-relaxed">
             Edit
