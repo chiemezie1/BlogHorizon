@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import ProfileImage from "../components/ProfileImage";
 
 function Post() {
   return (
