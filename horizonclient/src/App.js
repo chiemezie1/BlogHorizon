@@ -22,7 +22,7 @@ function App() {
       <Route path="/" element={<LayoutPage />}>
         <Route index element={<Home />} />
         <Route path="user-profile" element={<UserProfile />} />
-        <Route path="post/:postId" element={<PostDetail />} />
+        <Route path="post" element={<PostDetail />} />
         <Route path="explore" element={<Explore />} />
         <Route path="create-post" element={<CreatePost />} />
         <Route path="edit-post/:postId" element={<EditPost />} />

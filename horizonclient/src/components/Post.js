@@ -2,7 +2,7 @@ import React from 'react';
 import ProfileImage from "../components/ProfileImage";
 import { share, mode_comment } from "../svg/index";
 
-function Post() {
+function Post({svg, size_h, size_w}) {
   return (
     <div>
       <div className='border-2 border-gray-100 shadow-md'>
