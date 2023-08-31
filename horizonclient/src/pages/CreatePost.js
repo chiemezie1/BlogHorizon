@@ -4,7 +4,7 @@ function CreatePost() {
   return (
     <div>
        <div className="m-8 ">
-      <div>CreatePost</div>
+      <div>CreatePost page</div>
     </div>
     </div>
   )
