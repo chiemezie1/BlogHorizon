@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 function Login() {
   return (
-    <div>
-      <div className="sm:w-96 h-auto p-8 shadow-lg rounded-lg">
+    <div className='flex justify-center items-center h-screen'>
+      <div className="w-3/4 md:w-3/5 lg:w-[400px] h-auto p-8 shadow-lg rounded-lg">
         <div className="font-bold text-xl">Welcome</div>
         <div className="text-neutral-600 text-sm font-normal leading-relaxed">
           Login to your account
