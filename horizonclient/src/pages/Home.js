@@ -1,12 +1,12 @@
 import React from "react";
 import { bg } from "../svg/index"; // Import the bg variable
-
+import Navbar from "../components/Navbar";
 function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
         
-        {/* <Header /> */}
+        <Navbar />
 
         <main className="flex-grow container mx-auto p-4 md:p-6 lg:p-8">
             <section className="bg-white rounded-lg shadow-lg p-4 md:p-6 lg:p-8 mb-6">
