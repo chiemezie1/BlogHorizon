@@ -25,7 +25,7 @@ function App() {
         <Route path="post" element={<PostDetail />} />
         <Route path="explore" element={<Explore />} />
         <Route path="create-post" element={<CreatePost />} />
-        <Route path="edit-post/:postId" element={<EditPost />} />
+        <Route path="edit-post" element={<EditPost />} />
         <Route path="search" element={<SearchResults />} />
         <Route path="settings" element={<Settings />} />
         <Route path="privacy" element={<Privacy />} />
