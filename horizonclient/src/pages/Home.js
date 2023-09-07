@@ -1,6 +1,9 @@
 import React from "react";
 import { bg } from "../svg/index"; // Import the bg variable
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
+
 function Home() {
 
   return (
@@ -35,7 +38,7 @@ function Home() {
             </section>
         </main>
         
-        {/* <Footer /> */}
+        <Footer />
     </div>
 );
 }
