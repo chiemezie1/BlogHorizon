@@ -25,6 +25,7 @@ import schedule from './schedule.svg'
 import post from './post.svg'
 import home from './home.svg'
 import x_png from './x_png.png'
+import bg from './bg.png'
 
 
 
@@ -58,4 +59,5 @@ export{
     schedule,
     post,
     home,
+    bg,
 }
