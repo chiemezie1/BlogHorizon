@@ -1,46 +1,80 @@
 import React from "react";
-import { bg } from "../svg/index"; // Import the bg variable
+import { bg } from "../svg/index";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-
 function Home() {
-
+  const hasImage = bg && bg.length > 0;
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-        
-        <Navbar />
+      <Navbar />
 
-        <main className="flex-grow container mx-auto p-4 md:p-6 lg:p-8">
-            <section className="bg-white rounded-lg shadow-lg p-4 md:p-6 lg:p-8 mb-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    
-                    {/* Sample Article Container - You can loop through these based on your data */}
-                    <div className="flex flex-col border rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300">
-                        <div className="relative h-48 md:h-56 lg:h-64">
-                            <img 
-                                src="https://via.placeholder.com/400" 
-                                alt="News" 
-                                className="w-full h-full object-cover absolute inset-0"
-                            />
-                            <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end justify-start p-4">
-                                <span className="text-white text-sm bg-red-500 px-2 py-1 rounded">Category</span>
-                            </div>
-                        </div>
-                        <div className="p-4">
-                            <h2 className="text-xl font-bold mb-2 truncate">Article Title</h2>
-                            <p className="text-gray-600 text-sm mb-2">By Author Name - Date</p>
-                            <p className="text-gray-700 line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                        </div>
-                    </div>
+      <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <section className="bg-white rounded-lg shadow-lg p-6 lg:p-8 mb-6">
+          <div className="flex items-center gap-4 mb-6">
+            <img
+              src={bg}
+              alt="Profile"
+              className="h-12 w-12 rounded-full border-2 border-gray-300"
+            />
+            <p className="text-gray-900 font-semibold">Chiemezie Agbo</p>
+          </div>
 
+          <div
+            className={`grid grid-cols-1 ${
+              hasImage ? "md:grid-cols-2" : "md:grid-cols-1"
+            } gap-6`}
+          >
+            {/* Conditionally render the image container */}
+            {hasImage && (
+              <div className="relative h-56 md:h-auto md:flex-shrink-0">
+                <img
+                  src={bg}
+                  alt="News"
+                  className="w-full h-full object-cover absolute inset-0 rounded-lg"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end justify-start p-4">
+                  <span className="text-white text-xs md:text-sm bg-red-500 px-2 py-1 rounded">
+                    Category
+                  </span>
                 </div>
-            </section>
-        </main>
-        
-        <Footer />
+              </div>
+            )}
+            {!hasImage && (
+               <div className=" flex items-end justify-start">
+               <span className="text-white text-xs md:text-sm bg-gray-500 px-2 py-1 rounded">
+                 Category
+               </span>
+             </div>
+            )}
+            <div className="space-y-4">
+              <div>
+                <h2 className="text-xl font-bold mb-2 truncate">
+                  Article Title
+                </h2>
+                <p className="text-gray-700 line-clamp-3 mb-4">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+                </p>
+              </div>
+              <div className="text-gray-600 text-sm md:text-base">
+                A healthy weight is more than just a number on the scale; it's a
+                reflection of our overall well-being. Our weight can be an
+                indicator of our inner health, acting as a gauge of how our body
+                responds to our lifestyle choices. Maintaining a healthy weight
+                is not merely about conforming to societal beauty standards; it
+                is a vital component of overall well-being. Maintaining an
+                optimal weight means we are in tune with our body's needs, from
+                the foods we consume to the amount of physical activity we
+                engage in.
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
     </div>
-);
+  );
 }
 
 export default Home;
