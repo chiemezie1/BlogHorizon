@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { bg } from "../svg/index";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
 import { share, mode_comment, thumb_up } from "../svg/index";
 
 function Home() {
