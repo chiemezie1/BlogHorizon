@@ -24,6 +24,7 @@ import settings from './settings.svg'
 import schedule from './schedule.svg'
 import post from './post.svg'
 import home from './home.svg'
+import search from './search.svg'
 import x_png from './x_png.png'
 import bg from './bg.png'
 
@@ -58,6 +59,7 @@ export{
     x_png,
     schedule,
     post,
+    search,
     home,
     bg,
 }

@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
+import SearchBar from "../components/SearchBar";
 
 const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleSearch = (query) => {
+        // Handle your search logic here
+        // For now, we're just logging the query to the console
+        console.log("Searching for:", query);
+      };
 
     return (
         <nav className="bg-white shadow-lg m-2">
@@ -10,7 +17,7 @@ const Navbar = () => {
                 <div>
                     <h1 className="text-xl font-bold text-gray-700">Logo</h1>
                 </div>
-
+                <SearchBar onSearch={handleSearch} /> 
                 {/* Depending on login status, show appropriate links on the right */}
                 {isLoggedIn ? (
                     <div className="flex space-x-4 items-center">
