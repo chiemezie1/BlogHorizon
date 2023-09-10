@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { bg } from "../svg/index";
+import Like from '../components/Like';
+import Share from '../components/Share';
+import Comment from "../components/Comment";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CommentForm from "../components/CommentForm";
 
 import { share, mode_comment, thumb_up } from "../svg/index";
 
@@ -16,6 +20,21 @@ function Home() {
   const numLikes = likes.length;
   const numComment = comment.length;
   const numShare = shares.length;
+
+  const handleLikeClick = () => {
+    // Add your logic for liking here
+    console.log("Liked");
+  };
+
+  const handleShareClick = () => {
+    // Add your logic for sharing here
+    console.log("Shared");
+  };
+
+  const handleCommentClick = () => {
+    // Open the comment dialog
+    console.log("Open comment dialog here.");
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
@@ -87,26 +106,12 @@ function Home() {
               </Link>
             </div>
             <div className="flex gap-3 p-3">
-              <div className="flex justify-center items-center gap-1">
-                <img src={thumb_up} alt="thumb_up" className="h-4 w-4" />
-                <div>{numLikes}</div>
-              </div>
-
-              <div className="flex justify-center items-center gap-1">
-                <img
-                  src={mode_comment}
-                  alt="mode_comment"
-                  className="h-4 w-4 mt-1"
-                />
-                <div>{numComment}</div>
-              </div>
-
-              <div className="flex justify-center items-center gap-1">
-                <img src={share} alt="share" className="h-4 w-4" />
-                <div>{numShare}</div>
-              </div>
+              <Like onLike={handleLikeClick} />
+              <Comment onCommentClick={handleCommentClick} />
+              <Share onShare={handleShareClick} />
             </div>
           </div>
+          <CommentForm />
         </section>
       </main>
 
