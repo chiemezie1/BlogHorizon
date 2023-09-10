@@ -20,7 +20,7 @@ const SearchBar = ({ onSearch }) => {
           onChange={(e) => setSearchTerm(e.target.value)} 
         />
         <button type="submit">
-        <img src={search} alt="share" className="h-10 w-10 p-2" />
+        <img src={search} alt="share" className="h-8 w-8 p-1" />
         </button>
       </form>
     </div>
