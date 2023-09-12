@@ -13,7 +13,23 @@ function Register() {
         <div className="mt-3">
             <input
               type="text"
-              placeholder="Name"
+              placeholder="FirstName"
+              className="text-zinc-500 text-xs font-normal leading-relaxed
+              border-b-2 border-gray-500 focus:border-zinc-200 py-2 w-full outline-none"
+            />
+          </div>
+        <div className="mt-3">
+            <input
+              type="text"
+              placeholder="LastName"
+              className="text-zinc-500 text-xs font-normal leading-relaxed
+              border-b-2 border-gray-500 focus:border-zinc-200 py-2 w-full outline-none"
+            />
+          </div>
+        <div className="mt-3">
+            <input
+              type="text"
+              placeholder="UserName"
               className="text-zinc-500 text-xs font-normal leading-relaxed
               border-b-2 border-gray-500 focus:border-zinc-200 py-2 w-full outline-none"
             />
