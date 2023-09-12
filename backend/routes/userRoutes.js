@@ -1,98 +1,79 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken'); 
 const User = require('../models/userModel');
-const ensureAuthenticated = require('../middleware/auth');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
+const secret = process.env.JWT_SECRET || 'your-secret-key';
 
-const router = express.Router();
+const UserController = {
 
-// Register a user
-router.post('/register', async (req, res) => {
-    const { username, firstname, lastname, email, password } = req.body;
+    register: async (req, res) => {
+        try {
+            const existingUser = await User.findOne({ email: req.body.email });
+            if (existingUser) {
+                return res.status(400).json({ error: 'User already exists' });
+            }
 
-    try {
-        let user = await User.findOne({ email });
-        if (user) {
-            return res.status(400).json({ message: 'User already exists' });
+            const user = new User(req.body);
+            const savedUser = await user.save();
+
+            savedUser.password = undefined;
+            res.status(201).json(savedUser);
+        } catch (error) {
+            res.status(500).json({ error: 'Registration failed' });
         }
+    },
 
-        user = new User({
-            username,
-            firstname,
-            lastname,
-            email,
-            password,
-        });
+    login: async (req, res) => {
+        try {
+            const user = await User.findOne({ email: req.body.email });
+            if (!user) {
+                return res.status(400).json({ error: 'User not found' });
+            }
 
-        await user.save();
-        res.status(201).json(user);
-    } catch (error) {
-        res.status(500).json({ message: 'Server error' });
-    }
-});
+            const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+            if (!isPasswordValid) {
+                return res.status(400).json({ error: 'Invalid password' });
+            }
 
-// Login
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+            // Generate JWT token
+            const token = jwt.sign({ id: user._id }, secret, { expiresIn: '1h' });
 
-    try {
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            user.password = undefined;
+
+            res.json({ user, token });
+        } catch (error) {
+            res.status(500).json({ error: 'Login failed' });
         }
+    },
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+    getProfile: async (req, res) => {
+        try {
+            const user = req.user;
+            res.json(user);
+        } catch (error) {
+            res.status(500).json({ error: 'Failed to fetch profile' });
         }
+    },
 
-        // Generate JWT, if you're using JWT authentication
-        const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
-
-        res.json({ token });
-    } catch (error) {
-        res.status(500).json({ message: 'Server error' });
-    }
-});
-
-// Get profile
-router.get('/profile', ensureAuthenticated, async (req, res) => {
-    try {
-        const user = await User.findById(req.user.id).select('-password'); // not sending back the password
-        res.json(user);
-    } catch (error) {
-        res.status(500).json({ message: 'Server error' });
-    }
-});
-
-// Update profile
-router.put('/profile', ensureAuthenticated, async (req, res) => {
-    const updates = Object.keys(req.body);
-    try {
-        const user = await User.findById(req.user.id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+    updateProfile: async (req, res) => {
+        try {
+            const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body, { new: true });
+            updatedUser.password = undefined;
+            res.json(updatedUser);
+        } catch (error) {
+            res.status(500).json({ error: 'Failed to update profile' });
         }
+    },
 
-        updates.forEach((update) => user[update] = req.body[update]);
-
-        await user.save();
-        res.json(user);
-    } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+    deleteProfile: async (req, res) => {
+        try {
+            await User.findByIdAndDelete(req.user._id);
+            res.json({ message: 'User deleted successfully' });
+        } catch (error) {
+            res.status(500).json({ error: 'Failed to delete profile' });
+        }
     }
-});
 
-// Delete user
-router.delete('/profile', ensureAuthenticated, async (req, res) => {
-    try {
-        await User.findByIdAndDelete(req.user.id);
-        res.json({ message: 'User deleted' });
-    } catch (error) {
-        res.status(500).json({ message: 'Server error' });
-    }
-});
+};
 
-
-module.exports = router;
+module.exports = UserController;
