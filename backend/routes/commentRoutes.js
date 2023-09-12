@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { ensureAuthenticated } = require('../middleware/auth');
+const ensureAuthenticated  = require('../middleware/auth');
 const Comment = require('../models/commentModel');
 
 // List all comments for a post
