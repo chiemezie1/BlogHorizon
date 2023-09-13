@@ -25,7 +25,7 @@ The frontend of BlogHorizon is styled using **Tailwind CSS**, a utility-first CS
 
 2. **Install Dependencies**: Navigate to the project folder and install the required dependencies using the following command:
 
-   ```sh
+   ```
    npm install
    ```
 
