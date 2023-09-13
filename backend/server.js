@@ -24,7 +24,7 @@ app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 
 // Error handling
-app.use(errorHandling);  // Assuming errorHandling is a middleware function
+// app.use(errorHandling);
 
 const PORT = process.env.PORT || 3500;
 app.listen(PORT, () => {
