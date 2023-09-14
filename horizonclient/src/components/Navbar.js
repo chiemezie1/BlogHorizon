@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import { logout } from "../svg";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -32,24 +33,31 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             {isLoggedIn ? (
               <>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                  Create Post
-                </button>
+                <Link to="/create-post">
+                  <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Create Post
+                  </button>
+                </Link>
+
                 <button
                   onClick={() => setIsLoggedIn(false)}
                   className="text-gray-700 hover:text-gray-900"
                 >
                   Logout
                 </button>
-                <span className="text-gray-700 hover:text-gray-900 cursor-pointer">
-                  Profile 
-                </span>
+                <Link to="/user-profile">
+                  <span className="text-gray-700 hover:text-gray-900 cursor-pointer">
+                    Profile
+                  </span>
+                </Link>
               </>
             ) : (
               <>
-                <button className="text-gray-700 hover:text-gray-900">
-                  Register
-                </button>
+                <Link to="/register">
+                  <button className="text-gray-700 hover:text-gray-900">
+                    Register
+                  </button>
+                </Link>
                 <button
                   onClick={() => setIsLoggedIn(true)}
                   className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
@@ -78,12 +86,19 @@ const Navbar = () => {
             <div className="bg-white w-64 h-auto fixed top-0 right-0 overflow-y-auto p-2">
               {isLoggedIn ? (
                 <div className="flex flex-col space-y-4">
-                  <button className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600">
-                    Create Post
-                  </button>
-                  <button className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600">
-                    Profile
-                  </button>
+                  <Link
+                    to="/user-profile"
+                    className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600 text-center"
+                  >
+                    <button>Profile</button>
+                  </Link>
+                  <Link
+                    to="/create-post"
+                    className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600 text-center"
+                  >
+                    <button>Create Post</button>
+                  </Link>
+
                   <button
                     onClick={() => setIsLoggedIn(false)}
                     className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600"
@@ -93,9 +108,12 @@ const Navbar = () => {
                 </div>
               ) : (
                 <div className="flex flex-col space-y-4">
-                  <button className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600">
-                    Register
-                  </button>
+                  <Link
+                    to="/register"
+                    className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600 text-center"
+                  >
+                    <button>Register</button>
+                  </Link>
                   <button
                     onClick={() => setIsLoggedIn(true)}
                     className="text-gray-700 px-4 py-2 rounded hover:bg-blue-600"
