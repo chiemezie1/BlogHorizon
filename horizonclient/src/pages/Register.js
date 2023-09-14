@@ -11,6 +11,14 @@ function Register() {
   async function register(ev) {
     ev.preventDefault();
 
+    const userPayload = {
+      username,
+      firstname,
+      lastname,
+      email,
+      password
+    };
+
     try {
       const response = await fetch("http://localhost:4000/register", {
         method: "POST",
@@ -18,35 +26,25 @@ function Register() {
           "Content-Type": "application/json",
         },
         credentials: "include",
-
-        body: JSON.stringify({
-          username: username,
-          firstname: firstname,
-          lastname: lastname,
-          email: email,
-          password: password,
-        }),
+        body: JSON.stringify(userPayload)
       });
 
+      const responseData = await response.json();
+
       if (response.ok) {
-        // Registration was successful (status code 200 or 204)
-        alert("You have successfully registered!");
-      } else if (response.status === 400) {
-        // Bad Request - The server couldn't understand the request.
-        // This may occur if the data sent to the server is invalid.
-        const errorData = await response.json();
-        alert(`Registration failed: ${errorData.message}`);
+        // Notify user of successful registration
+        alert("Registration successful!");
+        // Optionally, redirect to a login/dashboard page or clear form
       } else {
-        // Other non-successful status codes (e.g., 404, 500, etc.)
-        // Handle other potential error cases here
-        alert("Registration failed: An unknown error occurred.");
+        // Display error message from server or a general error message
+        alert(`Registration failed: ${responseData.message || "An unknown error occurred."}`);
       }
     } catch (error) {
-      // Network error or other unexpected issues
       console.error("Error during registration:", error);
-      alert("Registration failed: An unexpected error occurred.");
+      alert("Registration failed due to network or server issues.");
     }
-  }
+}
+
 
   return (
     <div className="flex justify-center items-center h-screen">

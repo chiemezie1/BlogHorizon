@@ -1,16 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require("cors");
+const connectDB = require('./config/db');
+// const errorHandling = require('./middleware/errorHandling'); // Uncomment when ready to use
+
+// Routes
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
 const commentRoutes = require('./routes/commentRoutes');
-const connectDB = require('./config/db');
-const errorHandling = require('./middleware/errorHandling');
-const cors = require("cors");
-
 
 const app = express();
-app.use(cors({credentials:true, origin:'http://localhost:3000'}));
 
+// Set up CORS to accept requests from a specific origin and with credentials
+app.use(cors({ 
+    credentials: true,
+    origin: 'http://localhost:3000'
+}));
 
 // Database Connection
 connectDB();
@@ -19,16 +24,18 @@ connectDB();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Routes
-app.use('/api/users', userRoutes);
+// Routes Middleware
+app.use('/', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 
-// Error handling
-// app.use(errorHandling);
+// Error Handling Middleware
+// It's recommended to keep the error handling middleware last
+// This way it can catch any errors that may occur during request processing
+// app.use(errorHandling); // Uncomment when you have implemented errorHandling middleware
 
 const PORT = process.env.PORT || 3500;
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
-
