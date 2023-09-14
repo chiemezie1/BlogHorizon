@@ -45,6 +45,7 @@ const Navbar = () => {
                 >
                   Logout
                 </button>
+
                 <Link to="/user-profile">
                   <span className="text-gray-700 hover:text-gray-900 cursor-pointer">
                     Profile
@@ -58,12 +59,13 @@ const Navbar = () => {
                     Register
                   </button>
                 </Link>
-                <button
-                  onClick={() => setIsLoggedIn(true)}
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+
+                <Link
+                  to="/login"
+                  className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600 text-center"
                 >
-                  Login
-                </button>
+                  <button onClick={() => setIsLoggedIn(true)}>Login</button>
+                </Link>
               </>
             )}
           </div>
@@ -114,12 +116,12 @@ const Navbar = () => {
                   >
                     <button>Register</button>
                   </Link>
-                  <button
-                    onClick={() => setIsLoggedIn(true)}
-                    className="text-gray-700 px-4 py-2 rounded hover:bg-blue-600"
+                  <Link
+                    to="/login"
+                    className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600 text-center"
                   >
-                    Login
-                  </button>
+                    <button onClick={() => setIsLoggedIn(true)}>Login</button>
+                  </Link>
                 </div>
               )}
             </div>
