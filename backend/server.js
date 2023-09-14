@@ -5,11 +5,12 @@ const postRoutes = require('./routes/postRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const connectDB = require('./config/db');
 const errorHandling = require('./middleware/errorHandling');
+const cors = require("cors");
+
 
 const app = express();
+app.use(cors({credentials:true, origin:'http://localhost:3000'}));
 
-// Use dotenv to load environment variables
-require('dotenv').config();
 
 // Database Connection
 connectDB();
