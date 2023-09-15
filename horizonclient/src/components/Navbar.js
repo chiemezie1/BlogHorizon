@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import { logout } from "../svg";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLogin, login, logout } = useAuth();
+
   const [showNav, setShowNav] = useState(false);
 
   const handleSearch = (query) => {
@@ -31,7 +33,7 @@ const Navbar = () => {
 
           {/* Navigation for large screens */}
           <div className="hidden md:flex items-center space-x-4">
-            {isLoggedIn ? (
+            {isLogin ? (
               <>
                 <Link to="/create-post">
                   <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
@@ -40,7 +42,7 @@ const Navbar = () => {
                 </Link>
 
                 <button
-                  onClick={() => setIsLoggedIn(false)}
+                  onClick={logout}
                   className="text-gray-700 hover:text-gray-900"
                 >
                   Logout
@@ -54,17 +56,18 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link to="/register">
-                  <button className="text-gray-700 hover:text-gray-900">
-                    Register
-                  </button>
+                <Link
+                  to="/register"
+                  className="text-gray-700 hover:text-gray-900"
+                >
+                  Register
                 </Link>
 
                 <Link
                   to="/login"
                   className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600 text-center"
                 >
-                  <button onClick={() => setIsLoggedIn(true)}>Login</button>
+                  Login
                 </Link>
               </>
             )}
@@ -80,13 +83,12 @@ const Navbar = () => {
             </button>
           </div>
           <div
-            className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 ${
-              showNav ? "block" : "hidden"
-            } md:hidden`}
+            className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 ${showNav ? "block" : "hidden"
+              } md:hidden`}
             onClick={() => setShowNav(false)}
           >
             <div className="bg-white w-64 h-auto fixed top-0 right-0 overflow-y-auto p-2">
-              {isLoggedIn ? (
+              {isLogin ? (
                 <div className="flex flex-col space-y-4">
                   <Link
                     to="/user-profile"
@@ -102,7 +104,7 @@ const Navbar = () => {
                   </Link>
 
                   <button
-                    onClick={() => setIsLoggedIn(false)}
+                    onClick={logout}
                     className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600"
                   >
                     Logout
@@ -120,7 +122,7 @@ const Navbar = () => {
                     to="/login"
                     className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600 text-center"
                   >
-                    <button onClick={() => setIsLoggedIn(true)}>Login</button>
+                    <button>Login</button>
                   </Link>
                 </div>
               )}

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Navigate, Link } from "react-router-dom";
+import { useAuth  } from "../context/AuthContext";
+
 
 function Login() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [redirect, setRedirect] = useState(false);
+  const { isLogin, login, logout } = useAuth();
 
   async function handleLogin(ev) {
     ev.preventDefault();
@@ -18,7 +20,7 @@ function Login() {
     if (response.ok) {
       response.json().then(userInfo => {
         // setUserInfo(userInfo);
-        setRedirect(true);
+        login();
       });
     } else {
       alert('wrong credentials');
@@ -26,7 +28,7 @@ function Login() {
   }
 
 
-  if(redirect){
+  if(isLogin){
     return <Navigate to={'/'} />
   } 
  

@@ -15,7 +15,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { AuthProvider } from "./context/IsLoggedInContext";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
