@@ -38,12 +38,12 @@ function Login() {
         <div className="text-neutral-600 text-sm font-normal leading-relaxed">
           Login to your account
         </div>
-        <form onSubmit={(e) => e.preventDefault()} >
+        <form onSubmit={handleLogin} >
           <div className="mt-3">
             <input
               type="text"
               name='username'
-              placeholder="Enter email or phone number"
+              placeholder="Enter email or username"
               value={username}
               onChange={(ev) => setUsername(ev.target.value)}
               className="text-zinc-500 text-xs font-normal leading-relaxed
