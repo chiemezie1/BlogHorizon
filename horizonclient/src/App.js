@@ -15,27 +15,30 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { AuthProvider } from "./context/IsLoggedInContext";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LayoutPage />}>
-        <Route index element={<Home />} />
-        <Route path="user-profile" element={<UserProfile />} />
-        <Route path="post" element={<PostDetail />} />
-        <Route path="explore" element={<Explore />} />
-        <Route path="create-post" element={<CreatePost />} />
-        <Route path="edit-post" element={<EditPost />} />
-        <Route path="search" element={<SearchResults />} />
-        <Route path="settings" element={<Settings />} />
-        <Route path="privacy" element={<Privacy />} />
-        <Route path="terms-of-service" element={<TermsOfService />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<LayoutPage />}>
+          <Route index element={<Home />} />
+          <Route path="user-profile" element={<UserProfile />} />
+          <Route path="post" element={<PostDetail />} />
+          <Route path="explore" element={<Explore />} />
+          <Route path="create-post" element={<CreatePost />} />
+          <Route path="edit-post" element={<EditPost />} />
+          <Route path="search" element={<SearchResults />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="privacy" element={<Privacy />} />
+          <Route path="terms-of-service" element={<TermsOfService />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </AuthProvider>
   );
 }
 
