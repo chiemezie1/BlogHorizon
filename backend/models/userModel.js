@@ -45,10 +45,34 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
     }],
-    createdAt: {
+    introduction: {
+        type: String,
+        default: ''
+    },
+    followers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    following: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    joined: {
         type: Date,
         default: Date.now
-    }
+    },
+    location: {
+        type: String,
+        default: ''
+    },
+    whatsapp: {
+        type: String,
+        default: ''
+    },
+    twitterHandle: {
+        type: String,
+        default: ''
+    },
 });
 
 // Middleware to hash the password before saving
