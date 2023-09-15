@@ -19,7 +19,6 @@ function Login() {
     });
     if (response.ok) {
       response.json().then(userInfo => {
-        // setUserInfo(userInfo);
         login();
       });
     } else {

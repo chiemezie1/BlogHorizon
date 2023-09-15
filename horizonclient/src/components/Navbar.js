@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import { logout } from "../svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { isLogin, login, logout } = useAuth();
+  const location = useLocation();
+  const currentPathname = location.pathname;
+  const toPath = currentPathname === '/' ? '/user-profile' : '/';
+  const buttonLabel = currentPathname === '/' ? 'Profile' : 'Home';
 
+
+  const { isLogin, login, logout } = useAuth();
   const [showNav, setShowNav] = useState(false);
 
   const handleSearch = (query) => {
@@ -16,9 +21,11 @@ const Navbar = () => {
   return (
     <nav>
       {/* Search Bar */}
-      <div className="md:hidden m-2">
-        <SearchBar onSearch={handleSearch} />
-      </div>
+      {currentPathname === "/" && (
+        <div className="md:hidden m-2">
+          <SearchBar onSearch={handleSearch} />
+        </div>
+      )}
       <div className="bg-white shadow-lg m-1">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           {/* Logo on the Left */}
@@ -27,10 +34,11 @@ const Navbar = () => {
           </div>
 
           {/* Search Bar */}
-          <div className="hidden md:block md:pr-4 ">
-            <SearchBar onSearch={handleSearch} />
-          </div>
-
+          {currentPathname === "/" && (
+            <div className="hidden md:block md:pr-4">
+              <SearchBar onSearch={handleSearch} />
+            </div>
+          )}
           {/* Navigation for large screens */}
           <div className="hidden md:flex items-center space-x-4">
             {isLogin ? (
@@ -48,9 +56,9 @@ const Navbar = () => {
                   Logout
                 </button>
 
-                <Link to="/user-profile">
+                <Link to={toPath}>
                   <span className="text-gray-700 hover:text-gray-900 cursor-pointer">
-                    Profile
+                    {buttonLabel}
                   </span>
                 </Link>
               </>
@@ -83,21 +91,22 @@ const Navbar = () => {
             </button>
           </div>
           <div
-            className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 ${showNav ? "block" : "hidden"
-              } md:hidden`}
+            className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 ${
+              showNav ? "block" : "hidden"
+            } md:hidden`}
             onClick={() => setShowNav(false)}
           >
             <div className="bg-white w-64 h-auto fixed top-0 right-0 overflow-y-auto p-2">
               {isLogin ? (
                 <div className="flex flex-col space-y-4">
                   <Link
-                    to="/user-profile"
+                    to={toPath}
                     className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600 text-center"
                   >
-                    <button>Profile</button>
+                    <button>{buttonLabel}</button>
                   </Link>
                   <Link
-                    to="/create-post"
+                    to="create-post"
                     className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600 text-center"
                   >
                     <button>Create Post</button>
