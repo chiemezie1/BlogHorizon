@@ -7,9 +7,8 @@ import { useAuth } from "../context/AuthContext";
 const Navbar = () => {
   const location = useLocation();
   const currentPathname = location.pathname;
-  const toPath = currentPathname === '/' ? '/user-profile' : '/';
-  const buttonLabel = currentPathname === '/' ? 'Profile' : 'Home';
-
+  const toPath = currentPathname === "/" ? "/user-profile" : "/";
+  const buttonLabel = currentPathname === "/" ? "Profile" : "Home";
 
   const { isLogin, login, logout } = useAuth();
   const [showNav, setShowNav] = useState(false);
@@ -49,12 +48,14 @@ const Navbar = () => {
                   </button>
                 </Link>
 
-                <button
-                  onClick={logout}
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  Logout
-                </button>
+                <Link to="/">
+                  <button
+                    onClick={logout}
+                    className="text-gray-700 hover:text-gray-900"
+                  >
+                    Logout
+                  </button>
+                </Link>
 
                 <Link to={toPath}>
                   <span className="text-gray-700 hover:text-gray-900 cursor-pointer">
@@ -112,12 +113,14 @@ const Navbar = () => {
                     <button>Create Post</button>
                   </Link>
 
-                  <button
-                    onClick={logout}
-                    className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600"
-                  >
-                    Logout
-                  </button>
+                  <Link to="/">
+                    <button
+                      onClick={logout}
+                      className=" text-gray-700 px-4 py-2 rounded hover:bg-blue-600"
+                    >
+                      Logout
+                    </button>
+                  </Link>
                 </div>
               ) : (
                 <div className="flex flex-col space-y-4">
