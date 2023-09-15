@@ -1,21 +1,25 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 
-export const IsLoggedInContext = createContext();
+const AuthContext = createContext();
 
-export const IsLoggedInProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    return (
-        <IsLoggedInContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-            {children}
-        </IsLoggedInContext.Provider>
-    );
+export const useAuth = () => {
+  return useContext(AuthContext);
 };
 
-export const useIsLoggedIn = () => {
-    const context = useContext(IsLoggedInContext);
-    if (context === undefined) {
-        throw new Error('useIsLoggedIn must be used within an IsLoggedInProvider');
-    }
-    return context;
+export const AuthProvider = ({ children }) => {
+  const [isLogin, setIsLogin] = useState(false);
+
+  const login = () => {
+    setIsLogin(true);
+  };
+
+  const logout = () => {
+    setIsLogin(false);
+  };
+
+  return (
+    <AuthContext.Provider value={{ isLogin, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
