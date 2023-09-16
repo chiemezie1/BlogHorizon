@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ProfileImage from "../components/ProfileImage";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -10,37 +10,34 @@ function UserProfile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
-    fetch('http://localhost:4000/profile', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+    fetch("http://localhost:4000/profile", {
+      method: "GET",
+      credentials: "include",
     })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then((data) => {
-            setProfile(data);
-            setLoading(false);
-        })
-        .catch((error) => {
-            setError(error);
-            setLoading(false);
-        });
-}, []);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setProfile(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
 
-if (loading) {
+  if (loading) {
     return <div>Loading...</div>;
-}
+  }
 
-if (error) {
+  if (error) {
     return <div>Error: {error.message}</div>;
-}
+  }
 
   const svg = "path/to/your/svg";
 
@@ -59,17 +56,19 @@ if (error) {
             <ProfileImage svg={svg} size_w={64} size_h={64} />
             <div className="md:pl-4">
               <div className="text-black text-2xl font-bold text-center md:text-start leading-8">
-                {profile.firstname+ " "+profile.lastname }
+                {profile.firstname + " " + profile.lastname}
               </div>
               <div className="max-w-sm text-center md:text-start pt-2 leading-5">
-              {profile.introduction}
+                {profile.introduction}
               </div>
               <div className="flex flex-row justify-evenly md:flex-col pt-4 ">
                 <div className="font-semibold text-gray-700">
-                  Following: <span className="font-bold">{profile.following.length}</span>
+                  Following:{" "}
+                  <span className="font-bold">{profile.following.length}</span>
                 </div>
                 <div className="font-semibold text-gray-700">
-                  Followers: <span className="font-bold">{profile.followers.length}</span>
+                  Followers:{" "}
+                  <span className="font-bold">{profile.followers.length}</span>
                 </div>
               </div>
             </div>
@@ -84,13 +83,17 @@ if (error) {
             <div className=" flex p-2 gap-1 items-center">
               <img src={schedule} alt="-" className="h-4 w-4" />
               <div className="font-semibold text-gray-700">
-                Joined: <span className="font-bold">{new Date(profile.joined).toLocaleDateString()}</span>
+                Joined:{" "}
+                <span className="font-bold">
+                  {new Date(profile.joined).toLocaleDateString()}
+                </span>
               </div>
             </div>
             <div className=" flex p-2 gap-1 items-center">
               <img src={home} alt="-" className="h-4 w-4" />
               <div className="font-semibold text-gray-700">
-                Lives in: <span className="font-bold">{profile.location || " "}</span>
+                Lives in:{" "}
+                <span className="font-bold">{profile.location || " "}</span>
               </div>
             </div>
             <div className=" flex p-2 gap-1 items-center">

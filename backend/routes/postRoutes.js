@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const PostController = require('../controllers/postController');
-const ensureAuthenticated = require('../middleware/auth');
+const ensureAuthenticated = require('../middleware/AuthMiddleware');
 
 // Create a new post
 router.post('/create', ensureAuthenticated, PostController.createPost);

@@ -2,7 +2,7 @@ const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const secret = process.env.JWT_SECRET || "your-secret-key";
+const secret = process.env.JWT_SECRET;
 
 const UserController = {
     register: async (req, res) => {
@@ -55,13 +55,23 @@ const UserController = {
     },
 
     getProfile: async (req, res) => {
-        try {
-            const user = req.user;
+       
+        try { console.log('called the getfunction')
+            // Assuming that after decoding the JWT, the user's ID is on req.user._id
+            const user = await User.findById(req.user._id);
+            console.log(user)
+    
+            if (!user) {
+                return res.status(404).json({ error: "User not found" });
+            }
+    
+            user.password = undefined;
             res.json(user);
         } catch (error) {
             res.status(500).json({ error: "Failed to fetch profile" });
         }
     },
+    
 
     updateProfile: async (req, res) => {
         try {

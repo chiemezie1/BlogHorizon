@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const cors = require("cors");
 const connectDB = require('./config/db');
 // const errorHandling = require('./middleware/errorHandling'); // Uncomment when ready to use
@@ -9,8 +10,12 @@ const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 
+// Middleware
 const app = express();
 app.use(cookieParser());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Set up CORS to accept requests from a specific origin and with credentials
 app.use(cors({ 
@@ -21,9 +26,6 @@ app.use(cors({
 // Database Connection
 connectDB();
 
-// Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 // Routes Middleware
 app.use('/', userRoutes);
