@@ -9,6 +9,7 @@ const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
 const commentRoutes = require('./routes/commentRoutes');
+const imageRoutes = require('./routes/imageRoutes');
 
 // Middleware
 const app = express();
@@ -31,6 +32,7 @@ connectDB();
 app.use('/', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/image', imageRoutes);
 
 // Error Handling Middleware
 
