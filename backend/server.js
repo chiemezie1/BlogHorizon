@@ -30,8 +30,7 @@ app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 
 // Error Handling Middleware
-// It's recommended to keep the error handling middleware last
-// This way it can catch any errors that may occur during request processing
+
 // app.use(errorHandling); // Uncomment when you have implemented errorHandling middleware
 
 const PORT = process.env.PORT || 3500;

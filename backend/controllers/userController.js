@@ -47,8 +47,8 @@ const UserController = {
             const token = jwt.sign({ id: user._id }, secret, { expiresIn: "1h" });
 
             user.password = undefined;
-
-            res.json({ user, token });
+            res.cookie('token', token, { httpOnly: true, maxAge: 3600000, secure: true }); 
+            res.json({ user });
         } catch (error) {
             res.status(500).json({ error: "Login failed" });
         }

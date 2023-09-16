@@ -16,8 +16,8 @@ router.post('/login', UserController.login);
 
 // Private routes
 
-// // Fetch Profile of Authenticated User
-// router.get('/profile', AuthMiddleware.ensureAuthenticated, UserController.getProfile);
+// Fetch Profile of Authenticated User
+router.get('/profile', UserController.getProfile);
 
 // // Update Profile of Authenticated User
 // router.put('/profile', AuthMiddleware.ensureAuthenticated, UserController.updateProfile);

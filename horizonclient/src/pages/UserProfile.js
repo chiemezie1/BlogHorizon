@@ -12,7 +12,7 @@ function UserProfile() {
 
 
   useEffect(() => {
-    fetch('http://localhost:4000/getProfile', {
+    fetch('http://localhost:4000/profile', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
