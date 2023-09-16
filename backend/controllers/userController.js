@@ -55,22 +55,22 @@ const UserController = {
     },
 
     getProfile: async (req, res) => {
-       
-        try { console.log('called the getfunction')
-            // Assuming that after decoding the JWT, the user's ID is on req.user._id
-            const user = await User.findById(req.user._id);
-            console.log(user)
-    
-            if (!user) {
-                return res.status(404).json({ error: "User not found" });
-            }
-    
-            user.password = undefined;
-            res.json(user);
+        try {
+          // After decoding the JWT, the user's ID is on req.user._id
+          const user = await User.findById(req.user._id).select('-password');
+      
+          if (!user) {
+            console.log('User not found.');
+            return res.status(404).json({ error: "User not found" });
+          }
+      
+          res.json(user);
         } catch (error) {
-            res.status(500).json({ error: "Failed to fetch profile" });
+          console.error('Error:', error);
+          res.status(500).json({ error: "Failed to fetch profile" });
         }
-    },
+      },
+      
     
 
     updateProfile: async (req, res) => {
