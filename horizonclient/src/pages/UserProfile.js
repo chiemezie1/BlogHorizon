@@ -48,7 +48,7 @@ function UserProfile() {
         <div className="">
           <div className=" flex p-2 gap-1 justify-end items-center">
             <img src={settings} alt="-" className="h-4 w-4" />
-            <Link className="no-underline text-opacity-50 text-md font-semibold leading-relaxed">
+            <Link to='/edit-Profile' className="no-underline text-opacity-50 text-md font-semibold leading-relaxed">
               Edit
             </Link>
           </div>
