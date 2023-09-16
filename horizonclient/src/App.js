@@ -10,6 +10,7 @@ import EditPost from "./pages/EditPost";
 import SearchResults from "./pages/SearchResults";
 import Settings from "./pages/Settings";
 import Privacy from "./pages/Privacy";
+import EditProfile from "./pages/EditProfile";
 import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<LayoutPage />}>
           <Route index element={<Home />} />
           <Route path="user-profile" element={<UserProfile />} />
+          <Route path="edit-Profile" element={<EditProfile />} />
           <Route path="post" element={<PostDetail />} />
           <Route path="explore" element={<Explore />} />
           <Route path="create-post" element={<CreatePost />} />
