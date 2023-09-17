@@ -1,19 +1,6 @@
 const User = require('../models/userModel');
-const multer = require('multer');
+const fs = require('fs'); // To interact with the file system
 const path = require('path');
-const fs = require('fs');
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '../images/profile/')
-    },
-    filename: (req, file, cb) => {
-        // create a new filename with a unique timestamp followed by the original file's extension.
-        cb(null, Date.now() + path.extname(file.originalname)) 
-    }
-});
-
-const upload = multer({ storage: storage });
 
 exports.uploadProfileImage = async (req, res) => {
     try {
@@ -34,6 +21,16 @@ exports.uploadProfileImage = async (req, res) => {
     }
 };
 
+exports.uploadPostImage = async (req, res) => {
+    try {
+        // Assuming you handle post creation separately, here we just save the image
+        const filename = req.file.filename;
+        res.status(200).json({ message: 'Post image uploaded successfully', filename });
+    } catch (error) {
+        res.status(500).json({ message: 'Error uploading post image', error: error.message });
+    }
+};
+
 exports.updateProfileImage = async (req, res) => {
     try {
         const userId = req.user._id;
@@ -43,12 +40,14 @@ exports.updateProfileImage = async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const oldImagePath = path.join(__dirname, '../uploads/profile-images', user.profileImage);
+        // Optional: Delete the old image from the server
+        const oldImagePath = path.join(__dirname, '../uploads', user.profileImage);
         if (fs.existsSync(oldImagePath)) {
-            fs.unlinkSync(oldImagePath); // remove old image
+            fs.unlinkSync(oldImagePath);
         }
 
-        user.profileImage = req.file.filename; // update with new image filename
+        // Save the new filename to the user's profileImage field
+        user.profileImage = req.file.filename;
         await user.save();
 
         res.status(200).json({ message: 'Profile image updated successfully', filename: req.file.filename });
@@ -66,12 +65,14 @@ exports.deleteProfileImage = async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const imagePath = path.join(__dirname, '../uploads/profile-images', user.profileImage);
+        // Delete the image from the server
+        const imagePath = path.join(__dirname, '../uploads', user.profileImage);
         if (fs.existsSync(imagePath)) {
-            fs.unlinkSync(imagePath); // remove image
+            fs.unlinkSync(imagePath);
         }
 
-        user.profileImage = null; // clear image filename from user's document
+        // Remove the filename from the user's profileImage field
+        user.profileImage = null;
         await user.save();
 
         res.status(200).json({ message: 'Profile image deleted successfully' });
@@ -83,7 +84,7 @@ exports.deleteProfileImage = async (req, res) => {
 exports.serveImage = async (req, res) => {
     try {
         const filename = req.params.filename;
-        const filepath = path.join(__dirname, '../uploads/profile-images', filename);
+        const filepath = path.join(__dirname, '../uploads', filename);
 
         if (!fs.existsSync(filepath)) {
             return res.status(404).json({ message: 'Image not found' });
@@ -94,3 +95,4 @@ exports.serveImage = async (req, res) => {
         res.status(500).json({ message: 'Error serving image', error: error.message });
     }
 };
+
