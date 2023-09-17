@@ -17,8 +17,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage, limits: { fileSize: 5 * 1024 * 1024 } });
 
 router.post('/', ensureAuthenticated, upload.single('image'), ImageController.uploadProfileImage);
-router.get('/:filename', ensureAuthenticated, ImageController.serveProfileImage);
-router.delete('/:filename', ensureAuthenticated, ImageController.deleteProfileImage);
-router.put('/:filename', ensureAuthenticated, upload.single('image'), ImageController.updateProfileImage);
+// router.get('/:filename', ensureAuthenticated, ImageController.serveProfileImage);
+// router.delete('/:filename', ensureAuthenticated, ImageController.deleteProfileImage);
+// router.put('/:filename', ensureAuthenticated, upload.single('image'), ImageController.updateProfileImage);
 
 module.exports = router;
