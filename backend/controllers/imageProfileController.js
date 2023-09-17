@@ -5,10 +5,11 @@ const fs = require('fs');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/profile-images/')
+        cb(null, '../images/profile/')
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)) // append the original file extension
+        // create a new filename with a unique timestamp followed by the original file's extension.
+        cb(null, Date.now() + path.extname(file.originalname)) 
     }
 });
 

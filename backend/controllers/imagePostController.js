@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/post-images/') // Directory to store post images
+        cb(null, '../images/post/') // Directory to store post images
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname)) // Append the original file extension
