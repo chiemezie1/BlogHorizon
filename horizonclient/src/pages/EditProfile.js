@@ -36,7 +36,7 @@ function EditProfile() {
 
         <ImageUploader
           onImageSelected={handleImageSelected}
-          apiUrl="https://your-api-url.com/get-and-upload-image-endpoint"
+          apiUrl="https://your-api-url"
         />
         
         <form onSubmit={handleSubmit} className="space-y-4">
