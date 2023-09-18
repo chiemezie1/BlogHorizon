@@ -1,29 +1,15 @@
-const Post = require('../models/postModel'); 
-const multer = require('multer');
+const Post = require('../models/postModel');
+const fs = require('fs'); 
 const path = require('path');
-const fs = require('fs');
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '../images/post/') // Directory to store post images
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)) // Append the original file extension
-    }
-});
-
-const upload = multer({ storage: storage });
 
 exports.uploadPostImage = async (req, res) => {
     try {
-        const postId = req.params.postId; // Assuming you pass the post ID in the request
-        const post = await Post.findById(postId);
+        // Create a new post (or find an existing one)
+        const post = new Post({
+            image: req.file.filename, // Assuming image is a field in the Post model to save the image filename
+            // Other fields related to the post can be set here
+        });
 
-        if (!post) {
-            return res.status(404).json({ message: 'Post not found' });
-        }
-
-        post.image = req.file.filename;
         await post.save();
 
         res.status(200).json({ message: 'Post image uploaded successfully', filename: req.file.filename });
@@ -34,19 +20,21 @@ exports.uploadPostImage = async (req, res) => {
 
 exports.updatePostImage = async (req, res) => {
     try {
-        const postId = req.params.postId;
+        const postId = req.params.id; // Assuming the post ID is sent as a URL parameter
         const post = await Post.findById(postId);
 
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
 
-        const oldImagePath = path.join(__dirname, '../uploads/post-images', post.image);
+        // Optional: Delete the old image from the server
+        const oldImagePath = path.join(__dirname, '../uploads', post.image);
         if (fs.existsSync(oldImagePath)) {
-            fs.unlinkSync(oldImagePath); // remove old image
+            fs.unlinkSync(oldImagePath);
         }
 
-        post.image = req.file.filename; // update with new image filename
+        // Update with the new filename
+        post.image = req.file.filename;
         await post.save();
 
         res.status(200).json({ message: 'Post image updated successfully', filename: req.file.filename });
@@ -57,20 +45,21 @@ exports.updatePostImage = async (req, res) => {
 
 exports.deletePostImage = async (req, res) => {
     try {
-        const postId = req.params.postId;
+        const postId = req.params.id;
         const post = await Post.findById(postId);
 
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
 
-        const imagePath = path.join(__dirname, '../uploads/post-images', post.image);
+        // Delete the image from the server
+        const imagePath = path.join(__dirname, '../uploads', post.image);
         if (fs.existsSync(imagePath)) {
-            fs.unlinkSync(imagePath); // remove image
+            fs.unlinkSync(imagePath);
         }
 
-        post.image = null; // clear image filename from post's document
-        await post.save();
+        // Remove the post from the database (or just clear the image field if you don't want to delete the post)
+        await post.remove();
 
         res.status(200).json({ message: 'Post image deleted successfully' });
     } catch (error) {
@@ -81,7 +70,7 @@ exports.deletePostImage = async (req, res) => {
 exports.servePostImage = async (req, res) => {
     try {
         const filename = req.params.filename;
-        const filepath = path.join(__dirname, '../uploads/post-images', filename);
+        const filepath = path.join(__dirname, '../uploads', filename);
 
         if (!fs.existsSync(filepath)) {
             return res.status(404).json({ message: 'Image not found' });
@@ -92,3 +81,4 @@ exports.servePostImage = async (req, res) => {
         res.status(500).json({ message: 'Error serving post image', error: error.message });
     }
 };
+
