@@ -70,7 +70,7 @@ exports.deletePostImage = async (req, res) => {
 exports.servePostImage = async (req, res) => {
     try {
         const filename = req.params.filename;
-        const filepath = path.join(__dirname, '../uploads', filename);
+        const filepath = path.join(__dirname, '../images/post/', filename);
 
         if (!fs.existsSync(filepath)) {
             return res.status(404).json({ message: 'Image not found' });
