@@ -21,15 +21,6 @@ exports.uploadProfileImage = async (req, res) => {
     }
 };
 
-exports.uploadPostImage = async (req, res) => {
-    try {
-        // Assuming you handle post creation separately, here we just save the image
-        const filename = req.file.filename;
-        res.status(200).json({ message: 'Post image uploaded successfully', filename });
-    } catch (error) {
-        res.status(500).json({ message: 'Error uploading post image', error: error.message });
-    }
-};
 
 exports.updateProfileImage = async (req, res) => {
     try {
@@ -41,7 +32,7 @@ exports.updateProfileImage = async (req, res) => {
         }
 
         // Optional: Delete the old image from the server
-        const oldImagePath = path.join(__dirname, '../uploads', user.profileImage);
+        const oldImagePath = path.join(__dirname, '../images/profile/', user.profileImage);
         if (fs.existsSync(oldImagePath)) {
             fs.unlinkSync(oldImagePath);
         }
@@ -66,7 +57,7 @@ exports.deleteProfileImage = async (req, res) => {
         }
 
         // Delete the image from the server
-        const imagePath = path.join(__dirname, '../uploads', user.profileImage);
+        const imagePath = path.join(__dirname, '../images/profile/', user.profileImage);
         if (fs.existsSync(imagePath)) {
             fs.unlinkSync(imagePath);
         }
@@ -84,7 +75,7 @@ exports.deleteProfileImage = async (req, res) => {
 exports.serveImage = async (req, res) => {
     try {
         const filename = req.params.filename;
-        const filepath = path.join(__dirname, '../uploads', filename);
+        const filepath = path.join(__dirname, '../images/profile/', filename);
 
         if (!fs.existsSync(filepath)) {
             return res.status(404).json({ message: 'Image not found' });
