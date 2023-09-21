@@ -3,6 +3,7 @@ const fs = require('fs'); // To interact with the file system
 const path = require('path');
 
 exports.uploadProfileImage = async (req, res) => {
+    console.log("i called the contoller profile image functon")
     try {
         const userId = req.user._id;
         const user = await User.findById(userId);

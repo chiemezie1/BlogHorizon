@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function ImageUploader({ onImageSelected, initialImageUrl, apiUrl }) {
     const [currentImage, setCurrentImage] = useState(initialImageUrl);
@@ -30,14 +30,16 @@ function ImageUploader({ onImageSelected, initialImageUrl, apiUrl }) {
         }
     };
 
+
     const handleSaveImage = async () => {
         const formData = new FormData();
-        formData.append('image', selectedFile);
+        formData.append("image", selectedFile);
 
         try {
             const response = await fetch(apiUrl, {
-                method: 'POST',
+                method: "POST",
                 body: formData,
+                credentials: "include",
             });
 
             if (!response.ok) {
@@ -55,15 +57,18 @@ function ImageUploader({ onImageSelected, initialImageUrl, apiUrl }) {
 
     return (
         <div className="flex flex-col items-center mb-4">
-            <img src={currentImage || imagePreview} alt="profile" className=" rounded-full border-2 border-gray-300  w-32 h-32 object-cover" />
+            <img
+                src={currentImage || imagePreview}
+                alt="profile"
+                className=" rounded-full border-2 border-gray-300  w-32 h-32 object-cover"
+            />
 
-            <label className="text-sm font-medium text-gray-600" htmlFor="imageUpload">
+            <label
+                className="text-sm font-medium text-gray-600"
+                htmlFor="imageUpload"
+            >
                 Upload Image
             </label>
-
-
-
-
 
             <div className="mt-2 flex flex-row items-center justify-start gap-2">
                 <input
@@ -76,12 +81,14 @@ function ImageUploader({ onImageSelected, initialImageUrl, apiUrl }) {
                 />
 
                 {imagePreview && (
-                    <button onClick={handleSaveImage} className="bg-blue-500 text-white px-[0.32rem] rounded">
+                    <button
+                        onClick={handleSaveImage}
+                        className="bg-blue-500 text-white px-[0.32rem] rounded"
+                    >
                         Save
                     </button>
                 )}
             </div>
-
         </div>
     );
 }
