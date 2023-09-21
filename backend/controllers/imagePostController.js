@@ -7,7 +7,7 @@ exports.uploadPostImage = async (req, res) => {
         // Create a new post (or find an existing one)
         const post = new Post({
             image: req.file.filename, // Assuming image is a field in the Post model to save the image filename
-            // Other fields related to the post can be set here
+           
         });
 
         await post.save();
@@ -28,7 +28,7 @@ exports.updatePostImage = async (req, res) => {
         }
 
         // Optional: Delete the old image from the server
-        const oldImagePath = path.join(__dirname, '../uploads', post.image);
+        const oldImagePath = path.join(__dirname, '../images/post/', post.image);
         if (fs.existsSync(oldImagePath)) {
             fs.unlinkSync(oldImagePath);
         }
@@ -53,7 +53,7 @@ exports.deletePostImage = async (req, res) => {
         }
 
         // Delete the image from the server
-        const imagePath = path.join(__dirname, '../uploads', post.image);
+        const imagePath = path.join(__dirname, '../images/post/', post.image);
         if (fs.existsSync(imagePath)) {
             fs.unlinkSync(imagePath);
         }
