@@ -28,7 +28,6 @@ app.use(cors({
 // Database Connection
 connectDB();
 
-
 // Routes Middleware
 app.use('/', userRoutes);
 app.use('/api/posts', postRoutes);
